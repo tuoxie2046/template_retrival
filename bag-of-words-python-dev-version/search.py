@@ -28,15 +28,17 @@ image_path = args["image"]
 im_features, image_paths, idf, numWords, voc = joblib.load("bof.pkl")
     
 # Create feature extraction and keypoint detector objects
-fea_det = cv2.FeatureDetector_create("SIFT")
-des_ext = cv2.DescriptorExtractor_create("SIFT")
+# fea_det = cv2.FeatureDetector_create("SIFT")
+# des_ext = cv2.DescriptorExtractor_create("SIFT")
+sift = cv2.xfeatures2d.SIFT_create()
 
 # List where all the descriptors are stored
 des_list = []
 
 im = cv2.imread(image_path)
-kpts = fea_det.detect(im)
-kpts, des = des_ext.compute(im, kpts)
+# kpts = fea_det.detect(im)
+# kpts, des = des_ext.compute(im, kpts)
+kpts, des = sift.detectAndCompute(im, None)
 
 # rootsift
 #rs = RootSIFT()

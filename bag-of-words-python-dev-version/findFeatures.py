@@ -33,8 +33,9 @@ for training_name in training_names:
     image_paths += [image_path]
 
 # Create feature extraction and keypoint detector objects
-fea_det = cv2.FeatureDetector_create("SIFT")
-des_ext = cv2.DescriptorExtractor_create("SIFT")
+# fea_det = cv2.FeatureDetector_create("SIFT")
+sift = cv2.xfeatures2d.SIFT_create()
+# des_ext = cv2.DescriptorExtractor_create("SIFT")
 
 # List where all the descriptors are stored
 des_list = []
@@ -42,8 +43,9 @@ des_list = []
 for i, image_path in enumerate(image_paths):
     im = cv2.imread(image_path)
     print "Extract SIFT of %s image, %d of %d images" %(training_names[i], i, len(image_paths))
-    kpts = fea_det.detect(im)
-    kpts, des = des_ext.compute(im, kpts)
+    # kpts = fea_det.detect(im)
+    # kpts, des = des_ext.compute(im, kpts)
+    kpts, des = sift.detectAndCompute(im, None)
     # rootsift
     #rs = RootSIFT()
     #des = rs.compute(kpts, des)
